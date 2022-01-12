@@ -1,8 +1,22 @@
 import tkinter as tk
-from tkinter.constants import LEFT, RIGHT
+import requests
+from requests.models import Response
 
 S_Height = 700
 S_Width =  800
+
+
+
+#https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={API key}
+
+
+
+def get_weather(entry):
+    API_key = "7f68cf1250d1472a8ee143624221201"
+    API_call = f"http://api.weatherapi.com/v1/current.json"
+    params = {'key': API_key, 'q': entry,'alerts': "no", 'aqi': "no"}
+    response = requests.get(API_call,params=params)
+    print(response.json())
 
 root = tk.Tk()
 
@@ -18,7 +32,7 @@ background_label.place(x=0,y=0,relwidth=1, relheight=1)
 frame_top = tk.Frame(root, bg = "#006680")
 frame_top.place(relx = 0.1, rely = 0.1, relwidth = 0.8 ,relheight = 0.1)
 
-button = tk.Button(frame_top, text = "Nappi", bg = "#f2f2f2", fg = "black")
+button = tk.Button(frame_top, text = "Get Weather", bg = "#f2f2f2", fg = "black",command= lambda: get_weather(entry.get()))
 button.place(relx = 0.69, rely = 0.1, relwidth = 0.3 ,relheight = 0.8)
 
 entry= tk.Entry(frame_top, bg= "#f2f2f2",fg="black")
