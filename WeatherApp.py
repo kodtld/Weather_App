@@ -9,13 +9,13 @@ root = tk.Tk()
 canvas = tk.Canvas(root, height = S_Height, width = S_Width,bg="#8585ad")
 canvas.pack()
 
-background_image = tk.PhotoImage(file = './weather_bg.jpg')
+background_image = tk.PhotoImage(file = './weather_bg.png')
 background_label = tk.Label(root, image = background_image)
-background_label.place(relwidth=1, relheight=1)
+background_label.place(x=0,y=0,relwidth=1, relheight=1)
 
 # Top Frame
 
-frame_top = tk.Frame(root, bg = "#ccf2ff")
+frame_top = tk.Frame(root, bg = "#006680")
 frame_top.place(relx = 0.1, rely = 0.1, relwidth = 0.8 ,relheight = 0.1)
 
 button = tk.Button(frame_top, text = "Nappi", bg = "#f2f2f2", fg = "black")
@@ -26,7 +26,7 @@ entry.place(relx=0.01,rely=0.1,relwidth=0.65,relheight=0.8)
 
 # Bottom Frame
 
-frame_bot = tk.Frame(root, bg = "#ccf2ff")
+frame_bot = tk.Frame(root, bg = "#006680")
 frame_bot.place(relx = 0.1, rely = 0.3, relwidth = 0.8 ,relheight = 0.6)
 
 label = tk.Label(frame_bot, text= "Label is this", bg="#f2f2f2")
