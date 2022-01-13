@@ -1,8 +1,12 @@
+from email.mime import image
 import tkinter as tk
 from tkinter import font
 import requests
 from requests.api import request
 from requests.models import Response
+import io
+import base64
+from urllib.request import urlopen
 
 S_Height = 700
 S_Width =  800
@@ -15,8 +19,15 @@ def format_response(got_weather):
         City_Temp = got_weather['current']['temp_c']
         City_Feels = got_weather['current']['feelslike_c']
         City_Wind = got_weather['current']['gust_kph']
+        icon = f"https:{got_weather['current']['condition']['icon']}"
+        image_byt = urlopen(icon).read()
+        image_b64 = base64.encodebytes(image_byt) 
+        photo = tk.PhotoImage(data=image_b64)
+    
+        return f"{City_Name}, {City_Country}\nTemperature: {City_Temp} °C\nFeels like: {City_Feels} °C\nWind: {City_Wind} (kph)\n\n{photo}\n{City_Condition}"
 
-        return f"{City_Name}, {City_Country}\n{City_Condition}\nTemperature: {City_Temp}°C\nFeels like: {City_Feels}°C\nWind: {City_Wind}(kph)"
+    
+        
 
     except:
         return "Koomikko laita oikee kaupunki"
@@ -54,7 +65,7 @@ entry.place(relx=0.01,rely=0.1,relwidth=0.65,relheight=0.8)
 frame_bot = tk.Frame(root, bg = "#006680")
 frame_bot.place(relx = 0.1, rely = 0.3, relwidth = 0.8 ,relheight = 0.6)
 
-label = tk.Label(frame_bot, text= "", bg="#f2f2f2",font=("Nimbus Sans L",13),anchor='nw',justify='left',bd=4)
+label = tk.Label(frame_bot, text= "",image= "", bg="#f2f2f2",font=("Nimbus Sans L",13),anchor='nw',justify='left',bd=4)
 label.place(relx=0.015,rely=0.02,relwidth=0.97,relheight=0.96)
 
 root.mainloop()
