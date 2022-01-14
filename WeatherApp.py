@@ -32,6 +32,7 @@ def get_weather(entry):
     label['text'] = format_response(got_weather)
     
 root = tk.Tk()
+root.title("Get Weather")
 
 canvas = tk.Canvas(root, height = S_Height, width = S_Width,bg="#8585ad")
 canvas.pack()
