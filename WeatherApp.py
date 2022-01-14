@@ -3,13 +3,12 @@ import tkinter as tk
 from tkinter import font
 import requests
 from requests.api import request
-from requests.models import Response
-import io
 import base64
+import io
 from urllib.request import urlopen
 
-S_Height = 700
-S_Width =  800
+S_Height = 300
+S_Width =  700
 
 def format_response(got_weather):
     try:
@@ -19,18 +18,12 @@ def format_response(got_weather):
         City_Temp = got_weather['current']['temp_c']
         City_Feels = got_weather['current']['feelslike_c']
         City_Wind = got_weather['current']['gust_kph']
-        icon = f"https:{got_weather['current']['condition']['icon']}"
-        image_byt = urlopen(icon).read()
-        image_b64 = base64.encodebytes(image_byt) 
-        photo = tk.PhotoImage(data=image_b64)
     
-        return f"{City_Name}, {City_Country}\nTemperature: {City_Temp} °C\nFeels like: {City_Feels} °C\nWind: {City_Wind} (kph)\n\n{photo}\n{City_Condition}"
-
-    
+        return f"{City_Name}, {City_Country} | {City_Condition}\nTemperature: {City_Temp} °C | Feels like: {City_Feels} °C | Wind: {City_Wind} (kph)"
         
-
     except:
         return "Koomikko laita oikee kaupunki"
+
 
 def get_weather(entry):
     API_key = "7f68cf1250d1472a8ee143624221201"
@@ -52,7 +45,7 @@ background_label.place(x=0,y=0,relwidth=1, relheight=1)
 # Top Frame
 
 frame_top = tk.Frame(root, bg = "#006680")
-frame_top.place(relx = 0.1, rely = 0.1, relwidth = 0.8 ,relheight = 0.1)
+frame_top.place(relx = 0.1, rely = 0.1, relwidth = 0.8 ,relheight = 0.25)
 
 button = tk.Button(frame_top, text = "Get Weather", bg = "#f2f2f2", fg = "black",font=("Nimbus Sans L",13),command= lambda: get_weather(entry.get()))
 button.place(relx = 0.69, rely = 0.1, relwidth = 0.3 ,relheight = 0.8)
@@ -63,9 +56,9 @@ entry.place(relx=0.01,rely=0.1,relwidth=0.65,relheight=0.8)
 # Bottom Frame
 
 frame_bot = tk.Frame(root, bg = "#006680")
-frame_bot.place(relx = 0.1, rely = 0.3, relwidth = 0.8 ,relheight = 0.6)
+frame_bot.place(relx = 0.1, rely = 0.5, relwidth = 0.8 ,relheight = 0.4)
 
 label = tk.Label(frame_bot, text= "",image= "", bg="#f2f2f2",font=("Nimbus Sans L",13),anchor='nw',justify='left',bd=4)
-label.place(relx=0.015,rely=0.02,relwidth=0.97,relheight=0.96)
+label.place(relx=0.03,rely=0.1,relwidth=0.94,relheight=0.80)
 
 root.mainloop()
