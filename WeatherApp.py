@@ -3,8 +3,6 @@ import tkinter as tk
 from tkinter import font
 import requests
 from requests.api import request
-import base64
-import io
 from urllib.request import urlopen
 
 S_Height = 300
